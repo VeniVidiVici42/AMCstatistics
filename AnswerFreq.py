@@ -67,6 +67,10 @@ def update(year, grade, test, prev_ans_freq, prev_let_freq):
 	
 	idx=0
 	
+	'''
+	Answer choices in the html are of the form <li>answer</li> or #. answer; account for both possibilities
+	'''
+	
 	for i in range(len(html_str)-4):
 		if(html_str[i:i+4] == '<li>'):
 			if map(html_str[i+4]) > 4:
@@ -76,7 +80,15 @@ def update(year, grade, test, prev_ans_freq, prev_let_freq):
 			prev_ans_freq[idx][map(html_str[i+4])] = prev_ans_freq[idx][map(html_str[i+4])] + 1
 			prev_let_freq[map(html_str[i+4])] = prev_let_freq[map(html_str[i+4])] + 1
 			idx = idx + 1
-	
+		size=len('{0}. '.format(idx+1))
+		if(html_str[i:i+size] == '{0}. '.format(idx+1)):
+			if map(html_str[i+size]) > 4:
+				continue
+			if idx >= 25:
+				continue
+			prev_ans_freq[idx][map(html_str[i+size])] = prev_ans_freq[idx][map(html_str[i+size])] + 1
+			prev_let_freq[map(html_str[i+size])] = prev_let_freq[map(html_str[i+size])] + 1
+			idx = idx + 1
 	return (prev_ans_freq, prev_let_freq)
 
 '''
