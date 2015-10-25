@@ -91,10 +91,10 @@ letter_freq_10=[0]*5
 Updates answer frequencies for tests after 2002
 '''
 for i in range(2002,2016):
-	update(i, 12, 'A', answer_freq_12, letter_freq_12)
-	update(i, 12, 'B', answer_freq_12, letter_freq_12)
-	update(i, 10, 'A', answer_freq_10, letter_freq_10)
-	update(i, 10, 'B', answer_freq_10, letter_freq_10)
+	(answer_freq_12, letter_freq_12)=update(i, 12, 'A', answer_freq_12, letter_freq_12)
+	(answer_freq_12, letter_freq_12)=update(i, 12, 'B', answer_freq_12, letter_freq_12)
+	(answer_freq_10, letter_freq_10)=update(i, 10, 'A', answer_freq_10, letter_freq_10)
+	(answer_freq_10, letter_freq_10)=update(i, 10, 'B', answer_freq_10, letter_freq_10)
 
 print_12(answer_freq_12, letter_freq_12)
 print_10(answer_freq_10, letter_freq_10)
